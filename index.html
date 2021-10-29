@@ -17,30 +17,30 @@
         padding: 0;
         background-color: #121212;
       }
-      #terminal {
-        padding: 15px;
+      a {
+        text-decoration: inherit;
+        color: inherit;
+      }
+      .name {
+        color: indianred;
+        display: inline-block;
+        font-weight: bold;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+      }
+      .text {
+        padding: 1rem;
         font-family: "Space Mono", monospace;
         color: #fff;
         font-size: 1.2rem;
-        overflow: hidden;
-        animation: typing 5s steps(100, end);
       }
-      #cursor {
+      .cursor {
         background-color: #fff;
         color: #fff;
-        content: "#";
         animation: blink 1s infinite;
         user-select: none;
         display: inline-block;
       }
-      /* @keyframes typing {
-        from {
-          width: 0;
-        }
-        to {
-          width: 100%;
-        }
-      } */
       @keyframes blink {
         50% {
           opacity: 0;
@@ -51,22 +51,56 @@
     <title>Maximilian Gaedig</title>
   </head>
   <body>
-    <div id="terminal">
-      Hi, I'm Maximilian Gaedig, I'm currently a web developer for xxx.pl and
-      learning to be an sysadmin and network engineer.<br />
-      I have very diverse interests in the world of technology.<br />
-      I know: React, HTML, CSS, JavaScript, Python, Bash, Fish.
-      <div id="cursor">#</div>
+    <div id="about" class="text">
+      Hi, I'm
+      <div class="name">Maximilian Gaedig</div>
+      , I'm currently a web developer and learning to be an sysadmin and network
+      engineer. I have very diverse interests in the world of technology. I am
+      familiar with
+      <div class="name" style="color: lightskyblue">React</div>
+      ,
+      <div class="name" style="color: lightsalmon">HTML</div>
+      ,
+      <div class="name" style="color: lightblue">CSS</div>
+      ,
+      <div class="name" style="color: lightgoldenrodyellow">JavaScript</div>
+      ,
+      <div class="name" style="color: blue">Python</div>
+      and
+      <div class="name" style="color: lightgreen">Bash</div>
+      .
+      <div class="cursor"> </div>
     </div>
     <script>
-      terminal = document.getElementById("terminal");
-      console.log(terminal.innerText);
-      const terminal_text = terminal.innerText;
-      for (let i = 0; i < terminal_text.length; i++) {
-          setTimeout(function(i) {
-              terminal.innerHTML = terminal_text.slice(0, i) + "<div id='cursor'>#</div>"
-          }, 60 * i, i);
-      }
+      const animation = (id) => {
+        element = document.getElementById(id);
+        const text = element.innerHTML.replace(
+          '<div class="cursor"> </div>',
+          ""
+        );
+        let i = 0;
+        function type() {
+          if (i >= text.length) return;
+          // Combine multiple spaces into one
+          if (text.slice(i, i + 1) === " ") {
+            while (text[++i] === " ") {
+              i++;
+            }
+            i--;
+          }
+          // Skip tags
+          if (text[i] === "<") {
+            while (text[i] !== ">") {
+              i++;
+            }
+          }
+          element.innerHTML = text.slice(0, i) + "<div class='cursor'> </div>";
+          setTimeout(type, 60);
+          i++;
+        }
+        type();
+      };
+      animation("about");
     </script>
   </body>
 </html>
