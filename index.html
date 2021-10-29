@@ -62,7 +62,11 @@
       terminal = document.getElementById("terminal");
       console.log(terminal.innerText);
       const terminal_text = terminal.innerText;
-      terminal.innerText = terminal_text.slice(0, 2);
+      for (let i = 0; i < terminal_text.length; i++) {
+         setTimeout(function(i) {
+             terminal.innerText = terminal_text.slice(0, i)
+         }, 60 * i, i);
+      }
     </script>
   </body>
 </html>
