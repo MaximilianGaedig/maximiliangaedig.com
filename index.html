@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #121212;
+      }
+      #terminal {
+        padding: 15px;
+        font-family: "Space Mono", monospace;
+        color: #fff;
+        font-size: 1.2rem;
+        overflow: hidden;
+        animation: typing 5s steps(100, end);
+      }
+      #cursor {
+        background-color: #fff;
+        color: #fff;
+        content: "#";
+        animation: blink 1s infinite;
+        user-select: none;
+        display: inline-block;
+      }
+      /* @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      } */
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
+
+    <title>Maximilian Gaedig</title>
+  </head>
+  <body>
+    <div id="terminal">
+      Hi, I'm Maximilian Gaedig, I'm currently a web developer for xxx.pl and
+      learning to be an sysadmin and network engineer.<br />
+      I have very diverse interests in the world of technology.<br />
+      I know: React, HTML, CSS, JavaScript, Python, Bash, Fish.
+      <div id="cursor">#</div>
+    </div>
+    <script>
+      terminal = document.getElementById("terminal");
+      console.log(terminal.innerText);
+      const terminal_text = terminal.innerText;
+      terminal.innerText = terminal_text.slice(0, 2);
+    </script>
+  </body>
+</html>
