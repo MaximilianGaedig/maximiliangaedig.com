@@ -63,9 +63,9 @@
       console.log(terminal.innerText);
       const terminal_text = terminal.innerText;
       for (let i = 0; i < terminal_text.length; i++) {
-         setTimeout(function(i) {
-             terminal.innerText = terminal_text.slice(0, i)
-         }, 60 * i, i);
+          setTimeout(function(i) {
+              terminal.innerHTML = terminal_text.slice(0, i) + "<div id='cursor'>#</div>"
+          }, 60 * i, i);
       }
     </script>
   </body>
