@@ -12,6 +12,7 @@ import {
   SiNodedotjs,
   SiNextdotjs,
   SiGit,
+  SiTailwindcss,
 } from 'react-icons/si';
 import { MdDesignServices, MdEmail, MdHardware } from 'react-icons/md';
 import {
@@ -59,15 +60,23 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-white to-yellow-300',
       color: '#fde047',
       usage: 4,
-      experience: 9,
+      experience: 8,
     },
     {
       name: 'CSS',
       icon: FaCss3,
       gradient: 'from-white to-blue-500',
       color: '#3b82f6',
+      usage: 3,
+      experience: 6,
+    },
+    {
+      name: 'Tailwind CSS',
+      icon: SiTailwindcss,
+      gradient: 'from-blue-300 to-blue-500',
+      color: '#3b82f6',
       usage: 4,
-      experience: 7,
+      experience: 8,
     },
     {
       name: 'HTML',
@@ -75,7 +84,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-white to-orange-400',
       color: '#fb923c',
       usage: 4,
-      experience: 9,
+      experience: 8,
     },
     {
       name: 'TypeScript',
@@ -83,7 +92,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-white to-blue-500',
       color: '#3b82f6',
       usage: 4,
-      experience: 9,
+      experience: 8,
     },
     {
       name: 'Node.js',
@@ -91,7 +100,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-white to-green-500',
       color: '#22c55e',
       usage: 4,
-      experience: 9,
+      experience: 8,
     },
     {
       name: 'Next.js',
@@ -99,7 +108,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-zinc-700 to-white',
       color: '#fff',
       usage: 4,
-      experience: 7,
+      experience: 6,
     },
     {
       name: 'React',
@@ -107,7 +116,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-white to-blue-500',
       color: '#3b82f6',
       usage: 4,
-      experience: 7,
+      experience: 6,
     },
     {
       name: 'Rust',
@@ -117,21 +126,14 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       usage: 2,
       experience: 4,
     },
-    {
-      name: 'Tailwind',
-      icon: FaRust,
-      gradient: 'from-blue-300 to-blue-500',
-      color: '#3b82f6',
-      usage: 4,
-      experience: 9,
-    },
+
     {
       name: 'Linux Server Administration',
       icon: FaLinux,
       gradient: 'from-yellow-500 to-white',
       color: '#fff',
       usage: 4,
-      experience: 8,
+      experience: 7,
     },
     {
       name: 'Git',
@@ -139,7 +141,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-white to-orange-500',
       color: '#f97316',
       usage: 4,
-      experience: 7,
+      experience: 6,
     },
     {
       name: 'Python',
@@ -163,7 +165,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-white to-blue-500',
       color: '#3b82f6',
       usage: 3,
-      experience: 7,
+      experience: 6,
     },
     {
       name: 'AOSP Building/ROM flashing',
@@ -256,7 +258,6 @@ const Home: NextPage<Props> = ({ views }: Props) => {
           <span className="font-bold">
             <TechnologyList technologies={skills.filter((skill) => skill.experience < 7)} />
           </span>
-
           <br />
           <br />
           I like to
