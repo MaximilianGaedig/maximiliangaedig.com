@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
-import { Redis } from '@upstash/redis';
+import { createClient } from 'redis';
 import {
   SiMatrix,
   SiGithub,
@@ -16,7 +16,13 @@ import {
 import { MdDesignServices, MdEmail, MdHardware } from 'react-icons/md';
 import {
   FaCss3,
-  FaDocker, FaHtml5, FaJs, FaLinux, FaNetworkWired, FaPython, FaRust,
+  FaDocker,
+  FaHtml5,
+  FaJs,
+  FaLinux,
+  FaNetworkWired,
+  FaPython,
+  FaRust,
 } from 'react-icons/fa';
 import { IoHardwareChip } from 'react-icons/io5';
 import AccountElement, { Props as AccountElementProps } from '../components/AccountElement';
@@ -46,20 +52,13 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       account: 'mg@maximiliangaedig.com',
     },
   ];
-  const usageFrequency = {
-    0: 'Almost never',
-    1: 'Rarely',
-    2: 'Sometimes',
-    3: 'Often',
-    4: 'Almost daily',
-  };
   const skills = [
     {
       name: 'JavaScript',
       icon: FaJs,
       gradient: 'from-white to-yellow-300',
       color: '#fde047',
-      usage: 5,
+      usage: 4,
       experience: 9,
     },
     {
@@ -75,7 +74,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       icon: FaHtml5,
       gradient: 'from-white to-orange-400',
       color: '#fb923c',
-      usage: 5,
+      usage: 4,
       experience: 9,
     },
     {
@@ -83,7 +82,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       icon: SiTypescript,
       gradient: 'from-white to-blue-500',
       color: '#3b82f6',
-      usage: 5,
+      usage: 4,
       experience: 9,
     },
     {
@@ -91,7 +90,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       icon: SiNodedotjs,
       gradient: 'from-white to-green-500',
       color: '#22c55e',
-      usage: 5,
+      usage: 4,
       experience: 9,
     },
     {
@@ -99,7 +98,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       icon: SiNextdotjs,
       gradient: 'from-zinc-700 to-white',
       color: '#fff',
-      usage: 5,
+      usage: 4,
       experience: 7,
     },
     {
@@ -107,7 +106,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       icon: SiNodedotjs,
       gradient: 'from-white to-blue-500',
       color: '#3b82f6',
-      usage: 5,
+      usage: 4,
       experience: 7,
     },
     {
@@ -123,7 +122,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       icon: FaRust,
       gradient: 'from-blue-300 to-blue-500',
       color: '#3b82f6',
-      usage: 5,
+      usage: 4,
       experience: 9,
     },
     {
@@ -131,7 +130,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       icon: FaLinux,
       gradient: 'from-yellow-500 to-white',
       color: '#fff',
-      usage: 5,
+      usage: 4,
       experience: 8,
     },
     {
@@ -139,7 +138,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       icon: SiGit,
       gradient: 'from-white to-orange-500',
       color: '#f97316',
-      usage: 5,
+      usage: 4,
       experience: 7,
     },
     {
@@ -307,21 +306,17 @@ const Home: NextPage<Props> = ({ views }: Props) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const url = process.env.REDIS_URL;
-  const token = process.env.REDIS_TOKEN;
+  const client = createClient({
+    url: 'redis://redis',
+  });
   let views = 0;
-  if (!!url && !!token) {
-    try {
-      const redis = new Redis({
-        url,
-        token,
-      });
-      await redis.incr('views');
-      const serverViews = await redis.get('views');
-      if (typeof serverViews === 'number') views = serverViews;
-    } catch (e) {
-      console.error(e);
-    }
+  try {
+    await client.connect();
+    await client.incr('views');
+    const serverViews = await client.get('views');
+    if (typeof serverViews === 'number') views = serverViews;
+  } catch (e) {
+    console.error(e);
   }
   return {
     props: { views },
