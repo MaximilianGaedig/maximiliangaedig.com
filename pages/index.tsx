@@ -29,7 +29,7 @@ import AccountElement, { Props as AccountElementProps } from '../components/Acco
 import TechnologyList from '../components/TechnologyList';
 
 interface Props {
-  views: number;
+  views: string;
 }
 const Home: NextPage<Props> = ({ views }: Props) => {
   const accounts: AccountElementProps[] = [
@@ -283,7 +283,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
         <h1 className="text-2xl font-bold text-center my-2">Ways to contact me</h1>
         <br />
         <div className="grid lg:grid-cols-3 gap-5">
-          {accounts.map((account) => <AccountElement {...account} />)}
+          {accounts.map((account) => <AccountElement key={account.label} {...account} />)}
         </div>
       </main>
       <footer className="text-xl mt-16">
@@ -307,14 +307,14 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const client = createClient({
-    url: 'redis://redis',
+    url: 'redis://localhost:6379',
   });
-  let views = 0;
+  let views = '0';
   try {
     await client.connect();
     await client.incr('views');
     const serverViews = await client.get('views');
-    if (typeof serverViews === 'number') views = serverViews;
+    if (serverViews) views = serverViews;
   } catch (e) {
     console.error(e);
   }

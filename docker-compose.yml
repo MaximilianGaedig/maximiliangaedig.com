@@ -1,15 +1,14 @@
-# next js + redis
 version: "3.7"
 services:
   app:
     build: .
-    ports:
-      - "8080:8080"
     depends_on:
       - redis
+    networks:
+      - nginx
     restart: unless-stopped
   redis:
     image: redis:alpine
+    volumes:
       - ./data:/data
     restart: unless-stopped
-

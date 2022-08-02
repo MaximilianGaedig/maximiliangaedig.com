@@ -23,7 +23,7 @@ const TechnologyList: FC<Props> = ({ technologies }) => (
     {technologies.map(({
       name, icon, color, gradient, usage, experience,
     }) => (
-      <>
+      <span key={name}>
         <span className="group">
           <span className="invisible absolute md:group-hover:visible -mt-12 bg-zinc-700 py-0.5 px-2 rounded-md text-center">
             Usage:
@@ -44,7 +44,7 @@ const TechnologyList: FC<Props> = ({ technologies }) => (
         {icon({ className: 'inline', color })}
         ,
         {' '}
-      </>
+      </span>
     ))}
   </>
 );
