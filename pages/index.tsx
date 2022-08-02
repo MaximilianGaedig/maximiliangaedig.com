@@ -319,17 +319,18 @@ const Home: NextPage<Props> = ({ views }: Props) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const client = createClient({
-    url: 'redis://localhost:6379',
-  });
+  const url = process.env.REDIS_HOST_URL;
   let views = '0';
-  try {
-    await client.connect();
-    await client.incr('views');
-    const serverViews = await client.get('views');
-    if (serverViews) views = serverViews;
-  } catch (e) {
-    console.error(e);
+  if (url) {
+    try {
+      const client = createClient({ url });
+      await client.connect();
+      await client.incr('views');
+      const serverViews = await client.get('views');
+      if (serverViews) views = serverViews;
+    } catch (e) {
+      console.error(e);
+    }
   }
   return {
     props: { views },
