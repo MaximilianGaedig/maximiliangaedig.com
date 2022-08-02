@@ -287,10 +287,10 @@ const Home: NextPage<Props> = ({ views }: Props) => {
         </div>
       </main>
       <footer className="text-xl mt-16">
-        <p className="text-xl">
+        <p>
           Made with ❤️ by
           {' '}
-          <span className="text-xl font-bold">
+          <span className="font-bold">
             Maximilian Gaedig
           </span>
           <br />
