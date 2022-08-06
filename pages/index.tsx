@@ -68,7 +68,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-white to-blue-500',
       color: '#3b82f6',
       usage: 3,
-      experience: 6,
+      experience: 5,
     },
     {
       name: 'Tailwind CSS',
@@ -76,7 +76,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       gradient: 'from-blue-300 to-blue-500',
       color: '#3b82f6',
       usage: 4,
-      experience: 8,
+      experience: 6,
     },
     {
       name: 'HTML',
