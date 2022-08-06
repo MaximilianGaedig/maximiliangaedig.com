@@ -25,7 +25,7 @@ const TechnologyList: FC<Props> = ({ technologies }) => (
     }) => (
       <span key={name}>
         <span className="group">
-          <span className="invisible absolute md:group-hover:visible -mt-12 bg-zinc-700 py-0.5 px-2 rounded-md text-center">
+          <span className="absolute hidden invisible md:group-hover:visible -mt-12 bg-zinc-700 py-0.5 px-2 rounded-md text-center">
             Usage:
             {' '}
             {usageFrequency[usage] || 'Unknown'}

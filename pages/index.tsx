@@ -212,7 +212,7 @@ const Home: NextPage<Props> = ({ views }: Props) => {
     },
   ];
   return (
-    <div className="min-h-screen bg-zinc-800 text-white p-5 flex flex-col justify-between">
+    <div>
       <Head>
         <title>Maximilian Gaedig</title>
         <meta name="description" content="My info website" />
