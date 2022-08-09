@@ -1,7 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import type { GetServerSideProps, NextPage } from 'next';
-import Head from 'next/head';
-import { createClient } from 'redis';
 import {
   SiMatrix,
   SiGithub,
@@ -26,12 +24,16 @@ import {
   FaRust,
 } from 'react-icons/fa';
 import { IoHardwareChip } from 'react-icons/io5';
+import Link from 'next/link';
 import AccountElement, { Props as AccountElementProps } from '../components/AccountElement';
 import TechnologyList from '../components/TechnologyList';
+import Layout from '../components/Layout';
+import setAndGetViews from '../utils/views';
 
 interface Props {
-  views: string;
+  views: string
 }
+
 const Home: NextPage<Props> = ({ views }: Props) => {
   const accounts: AccountElementProps[] = [
     {
@@ -212,127 +214,89 @@ const Home: NextPage<Props> = ({ views }: Props) => {
     },
   ];
   return (
-    <div>
-      <Head>
-        <title>Maximilian Gaedig</title>
-        <meta name="description" content="My info website" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="text-xl">
-        <h1 className="text-2xl font-bold text-center my-2">About me</h1>
-        <p>
-          Hi 👋, I&#39;m
-          {' '}
-          <span className="font-bold bg-gradient-to-r bg-clip-text text-transparent from-pink-500 via-purple-500 to-blue-500 animate-text">
-            Maximilian Gaedig
-          </span>
-          <br />
-          <br />
-          I&#39;m currently a
-          {' '}
-          <span className="font-bold">
-            Full Stack Developer / Software Engineer 🧑‍💻
-          </span>
-          {' '}
-          based in
-          {' '}
-          <span className="font-bold bg-gradient-to-r bg-clip-text text-transparent from-white to-red-500 animate-text">
-            Poznan, Poland
-          </span>
-          {' '}
-          🇵🇱
-          <br />
-          <br />
-          I love to code and create open source projects.
-          <br />
-          <br />
-          I am proficient in
-          {' '}
-          <span className="font-bold">
-            <TechnologyList technologies={skills.filter((skill) => skill.experience >= 7)} />
-          </span>
-          <br />
-          <br />
-          And have some experience with
-          {' '}
-          <span className="font-bold">
-            <TechnologyList technologies={skills.filter((skill) => skill.experience < 7)} />
-          </span>
-          <br />
-          <br />
-          I like to
-          {' '}
-          costumize my own hardware/software,
-          {' '}
-          self-host services,
-          {' '}
-          tinker with my homelab,
-          {' '}
-          share my knowledge with the world,
-          {' '}
-          make new friends,
-          {' '}
-          and
-          {' '}
-          learn new things.
-          <br />
-          <br />
-          <span className="font-bold">
-            🚧 Website still under construction 🚧
-          </span>
-        </p>
-        <h1 className="text-2xl font-bold text-center my-2">Ways to contact me</h1>
+    <Layout index views={views}>
+      <h1 className="text-2xl font-bold text-center my-2">About me</h1>
+      <p>
+        Hi 👋, I&#39;m
+        {' '}
+        <span className="font-bold bg-gradient-to-r bg-clip-text text-transparent from-pink-500 via-purple-500 to-blue-500 animate-text">
+          Maximilian Gaedig
+        </span>
         <br />
-        <div className="grid lg:grid-cols-3 gap-5">
-          {accounts.map((account) => <AccountElement key={account.label} {...account} />)}
+        <br />
+        I&#39;m currently a
+        {' '}
+        <span className="font-bold">
+          Full Stack Developer / Software Engineer 🧑‍💻
+        </span>
+        {' '}
+        based in
+        {' '}
+        <span className="font-bold bg-gradient-to-r bg-clip-text text-transparent from-white to-red-500 animate-text">
+          Poznan, Poland
+        </span>
+        {' '}
+        🇵🇱
+        <br />
+        <br />
+        I love to code and create open source projects.
+        <br />
+        <br />
+        I am proficient in
+        {' '}
+        <span className="font-bold">
+          <TechnologyList technologies={skills.filter((skill) => skill.experience >= 7)} />
+        </span>
+        <br />
+        <br />
+        And have some experience with
+        {' '}
+        <span className="font-bold">
+          <TechnologyList technologies={skills.filter((skill) => skill.experience < 7)} />
+        </span>
+        <br />
+        <br />
+        I like to
+        {' '}
+        costumize my own hardware/software,
+        {' '}
+        self-host services,
+        {' '}
+        tinker with my homelab,
+        {' '}
+        share my knowledge with the world,
+        {' '}
+        make new friends,
+        {' '}
+        and
+        {' '}
+        learn new things.
+        <br />
+        <br />
+        <span className="font-bold">
+          🚧 Website still under construction 🚧
+        </span>
+      </p>
+
+      <Link href="/blog">
+        <div className="bg-zinc-900 hover:bg-zinc-600 mx-auto my-5 w-max p-5 rounded-xl cursor-pointer">
+          <h1 className="text-center text-4xl font-bold rounded-xl">My blog</h1>
         </div>
-      </main>
-      <footer className="text-xl mt-16">
-        <p>
-          Made with ❤️ by
-          {' '}
-          <span className="font-bold">
-            Maximilian Gaedig
-          </span>
-          <br />
-          Views:
-          {' '}
-          {views}
-          <br />
-          <br />
-          <span className="text-base">
-            My usage frequency and experience of my skills is mostly based on self assessment,
-            experience is on a scale from 0-9,
-            {' '}
-            of which 9 is knowing everything and 0 is knowing nothing.
-            <br />
-            In the future I plan to replace this with
-            {' '}
-            a widely used assessment system if I find one.
-          </span>
-        </p>
-      </footer>
-    </div>
+      </Link>
+
+      <h1 className="text-2xl font-bold text-center my-2">Ways to contact me</h1>
+      <br />
+      <div className="grid lg:grid-cols-3 gap-5">
+        {accounts.map((account) => <AccountElement key={account.label} {...account} />)}
+      </div>
+    </Layout>
   );
 };
 
-export default Home;
+export const getServerSideProps: GetServerSideProps<Props> = async () => ({
+  props: {
+    views: await setAndGetViews('/'),
+  },
+});
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const url = process.env.REDIS_HOST_URL;
-  let views = '0';
-  if (url) {
-    try {
-      const client = createClient({ url });
-      await client.connect();
-      await client.incr('views');
-      const serverViews = await client.get('views');
-      if (serverViews) views = serverViews;
-    } catch (e) {
-      console.error(e);
-    }
-  }
-  return {
-    props: { views },
-  };
-};
+export default Home;

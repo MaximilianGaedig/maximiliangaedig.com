@@ -1,0 +1,9 @@
+.post h1 {
+  @apply text-4xl font-bold mb-4;
+}
+.post p {
+  @apply leading-7 whitespace-pre-wrap;
+}
+.post a {
+  @apply underline
+}

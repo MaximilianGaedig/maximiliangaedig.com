@@ -38,7 +38,6 @@ const TechnologyList: FC<Props> = ({ technologies }) => (
           <span className={typeof gradient !== 'undefined' ? `font-bold bg-gradient-to-r bg-clip-text text-transparent ${gradient} animate-text` : ''}>
             {name}
           </span>
-
         </span>
         {' '}
         {icon({ className: 'inline', color })}
