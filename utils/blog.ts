@@ -20,7 +20,7 @@ export const getPost = async (file: string, fullPost: boolean = true) => {
       tags,
       thumbnail,
     }, content,
-  } = matter(await readFile(`./posts/${file}.mdx`, 'utf-8'));
+  } = matter(await readFile(`./public/posts/${file}.mdx`, 'utf-8'));
   return {
     date,
     content: fullPost ? await serialize(content) : await serialize(
@@ -37,6 +37,6 @@ export const getPost = async (file: string, fullPost: boolean = true) => {
   };
 };
 
-export const getPosts = async (full: boolean = false): Promise<Post[]> => Promise.all((await readdir('./posts', { withFileTypes: true }))
+export const getPosts = async (full: boolean = false): Promise<Post[]> => Promise.all((await readdir('./public/posts', { withFileTypes: true }))
   .filter((d) => d.isFile() && d.name.endsWith('.mdx'))
   .map(async (file) => getPost(file.name.replace(/.mdx$/g, ''), full)));
