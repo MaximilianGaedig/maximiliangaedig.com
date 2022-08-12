@@ -14,6 +14,12 @@ const Layout: FC<Props> = ({ children, index, ...props }) => (
       <title>Maximilian Gaedig</title>
       <meta name="description" content="My info website" />
       <link rel="icon" href="/favicon.ico" />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="RSS"
+        href="/feed.xml"
+      />
     </Head>
     <main className="text-xl">
       {children}
