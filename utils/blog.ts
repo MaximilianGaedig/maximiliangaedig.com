@@ -1,6 +1,10 @@
 import {
   mkdir,
-  readdir, readFile, rmdir, writeFile,
+  readdir,
+  readFile,
+  rm,
+  writeFile,
+  stat,
 } from 'fs/promises';
 import readingTime from 'reading-time';
 import { serialize } from 'next-mdx-remote/serialize';
@@ -114,7 +118,10 @@ export const generateRssFeed = async (): Promise<void> => {
       date: new Date(post.date),
     });
   });
-  await rmdir('./public/rss', { recursive: true });
+  try {
+    await stat('./public/rss');
+    await rm('./public/rss', { recursive: true });
+  } catch { /* ignore */ }
   await mkdir('./public/rss', { recursive: true });
   await writeFile('./public/rss/atom.xml', feed.atom1());
   await writeFile('./public/rss/feed.json', feed.json1());
