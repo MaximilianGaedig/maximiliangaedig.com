@@ -6,6 +6,8 @@ services:
       - redis
     ports:
       - "8080:3000"
+    environment:
+      REDIS_HOST_URL: redis://redis:6379
     restart: unless-stopped
   redis:
     image: redis:alpine

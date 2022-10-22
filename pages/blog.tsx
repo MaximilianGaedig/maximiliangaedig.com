@@ -1,4 +1,4 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 // import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -107,7 +107,8 @@ const Blog: NextPage<Props> = ({ posts }: Props) => (
     </div>
   </Layout>
 );
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
   await generateRssFeed();
   return {
     props: {
