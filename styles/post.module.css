@@ -1,5 +1,17 @@
 .post h1 {
-  @apply text-4xl font-bold mb-4;
+  @apply text-4xl font-bold mb-2;
+}
+.post h2 {
+  @apply text-2xl font-bold;
+}
+.post h3 {
+  @apply text-xl font-bold;
+}
+.post h4 {
+  @apply text-lg font-bold;
+}
+.post h5 {
+  @apply text-lg;
 }
 .post p {
   @apply leading-7 whitespace-pre-wrap;

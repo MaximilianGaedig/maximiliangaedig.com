@@ -16,6 +16,7 @@ module.exports = {
       },
       animation: {
         text: 'text 5s ease infinite',
+        slideIn: 'slideIn 0.8s ease-in-out',
       },
       keyframes: {
         text: {
@@ -28,6 +29,16 @@ module.exports = {
             'background-position': 'right center'
           }
         },
+        slideIn: {
+          '0%': {
+            transform: 'translateX(-50%)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          }
+        }
       }
     },
     plugins: [],

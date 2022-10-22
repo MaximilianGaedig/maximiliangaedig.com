@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 import {
   SiMatrix,
   SiGithub,
@@ -24,17 +24,14 @@ import {
   FaRust,
 } from 'react-icons/fa';
 import { IoHardwareChip } from 'react-icons/io5';
-import Link from 'next/link';
+import Link from '../components/Link';
 import AccountElement, { Props as AccountElementProps } from '../components/AccountElement';
 import TechnologyList from '../components/TechnologyList';
 import Layout from '../components/Layout';
-import setAndGetViews from '../utils/views';
+import useViews from '../hooks/useViews';
 
-interface Props {
-  views: string
-}
-
-const Home: NextPage<Props> = ({ views }: Props) => {
+const Home: NextPage = () => {
+  const views = useViews('index', true);
   const accounts: AccountElementProps[] = [
     {
       href: 'https://matrix.to/#/@mg:maximiliangaedig.com',
@@ -214,7 +211,27 @@ const Home: NextPage<Props> = ({ views }: Props) => {
     },
   ];
   return (
-    <Layout index views={views}>
+    <Layout footerContent={(
+      <>
+        <br />
+        Views:
+        {' '}
+        {views}
+        <br />
+        <br />
+        <span className="text-base">
+          My usage frequency and experience of my skills is mostly based on self assessment,
+          experience is on a scale from 0-9,
+          {' '}
+          of which 9 is knowing everything and 0 is knowing nothing.
+          <br />
+          In the future I plan to replace this with
+          {' '}
+          a widely used assessment system if I find one.
+        </span>
+      </>
+    )}
+    >
       <h1 className="text-2xl font-bold text-center my-2">About me</h1>
       <p>
         Hi 👋, I&#39;m
@@ -279,12 +296,11 @@ const Home: NextPage<Props> = ({ views }: Props) => {
       </p>
 
       <Link href="/blog">
-        <div className="bg-zinc-900 hover:bg-zinc-600 mx-auto my-5 w-max p-5 rounded-xl cursor-pointer">
+        <div className="bg-zinc-900 hover:bg-zinc-600 mx-auto my-5 w-max p-5 rounded-xl">
           <h1 className="text-center text-4xl font-bold rounded-xl">My blog</h1>
         </div>
       </Link>
-
-      <h1 className="text-2xl font-bold text-center my-2">Ways to contact me</h1>
+      <h1 className="text-2xl font-bold text-center my-2">My socials</h1>
       <br />
       <div className="grid lg:grid-cols-3 gap-5">
         {accounts.map((account) => <AccountElement key={account.label} {...account} />)}
@@ -292,11 +308,5 @@ const Home: NextPage<Props> = ({ views }: Props) => {
     </Layout>
   );
 };
-
-export const getServerSideProps: GetServerSideProps<Props> = async () => ({
-  props: {
-    views: await setAndGetViews('/'),
-  },
-});
 
 export default Home;

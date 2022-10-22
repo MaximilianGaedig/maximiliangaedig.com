@@ -7,7 +7,10 @@
       "name": "Debug",
       "runtimeExecutable": "yarn",
       "cwd": "${workspaceFolder}",
-      "runtimeArgs": ["dev"]
+      "runtimeArgs": ["dev"],
+      "env": {
+        "REDIS_HOST_URL": "redis://localhost",
+      },
     }
   ]
 }
